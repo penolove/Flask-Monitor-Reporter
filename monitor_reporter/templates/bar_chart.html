@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html>
+  <head></head>
+  <script type="text/javascript">
+    var Title_str = "MonitorReporter"
+    function pad(n, width, z) {
+      z = z || '0';
+      n = n + '';
+      return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+    }
+
+    function onClick(e) {
+      console.log(e);
+      var date = e.dataPoint.x;
+      var day = pad(date.getDate(),2);
+      var monthIndex = pad(date.getMonth()+1,2);
+      var year = date.getFullYear();
+      var hour = pad(date.getHours(),2);
+      var label = e.dataSeries.legendText;
+      var query = label + '-' + year + '-' + monthIndex + '-' + day+ '-' + hour;
+      window.open('/album/' + query, 'mywin', 'width=500');
+    }
+
+    window.onload = function () {
+      var chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
+        theme: "light2", //"light1", "dark1", "dark2"
+        title:{
+          text: "Monitor Reporter"
+        },
+        axisY:{
+          interval: 10,
+          suffix: "%"
+        },
+        toolTip:{
+          content: "{x} </br> label: {cls} , Count: {y}"
+        },
+        data:[
+          {% for label, time_counter_str in result_tuples %}
+            {
+              type: "stackedBar100",
+              dataPointMaxWidth: 20,
+              click: onClick,
+              legendText: "{{label | safe}}",
+              showInLegend: "true",
+              dataPoints: [
+                {{time_counter_str | safe}}
+              ]
+            },
+          {% endfor %}
+        ]
+      });
+      chart.render();
+    }
+
+    function date_handler(e){
+      var date_str = e.target.value;
+      alert(date_str);
+      location.href = "/bar_chart/"+date_str;
+    }
+
+  </script>
+  <script type="text/javascript" src="/static/canvasjs.min.js"></script>
+
+  <body>
+    <input type="date" id="dt" onchange="date_handler(event);"/>
+    <div id="chartContainer" style="height: 100%; width: 100%;">
+    </div>
+  </body>
+
+</html>
