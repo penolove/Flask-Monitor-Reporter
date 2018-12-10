@@ -26,3 +26,11 @@ flask run
 # the db config were set in monitor_reporter/__init__.py
 
 ```
+
+
+## flask server with uwsgi and nginx example
+with help https://github.com/tiangolo/uwsgi-nginx-flask-docker
+```
+docker build -t myimage -f Dockerfile .
+docker run -d --name mycontainer -p 80:80 myimage
+```
