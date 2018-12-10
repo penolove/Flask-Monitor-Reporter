@@ -33,4 +33,7 @@ with help https://github.com/tiangolo/uwsgi-nginx-flask-docker
 ```
 docker build -t myimage -f Dockerfile .
 docker run -d --name mycontainer -p 80:80 myimage
+
+# used db location /app/instance/example.sqlite
+# used static location /app/monitor_reporter/static
 ```
