@@ -31,9 +31,14 @@ flask run
 ## flask server with uwsgi and nginx example
 with help https://github.com/tiangolo/uwsgi-nginx-flask-docker
 ```
-docker build -t myimage -f Dockerfile .
-docker run -d --name mycontainer -p 80:80 myimage
+docker build -t monitor_reporter -f Dockerfile .
+docker run -d --name monitor_reporter_container -p 80:80 monitor_reporter
 
 # used db location /app/instance/example.sqlite
 # used static location /app/monitor_reporter/static
 ```
+
+
+## test line webhook with ngrok
+since the feedback handler for line need to register webhook, which require https service
+a quick solution is using ngrok: https://ngrok.com/
