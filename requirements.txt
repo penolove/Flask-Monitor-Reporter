@@ -1,2 +1,2 @@
 flask==1.0.2
-eyewitness==0.38
+eyewitness==0.39
