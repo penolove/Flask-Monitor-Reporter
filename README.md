@@ -1,16 +1,5 @@
 # MonitorReporter - flask
 
-## used tools:
-```
-# js
-canvasjs - v2.2
-
-# python
-flask
-flask-admin
-eyewitenss
-```
-
 ## quick start
 ```
 pyenv virtualenv monitor_36
@@ -50,4 +39,16 @@ line register webhook require https service
 a quick solution is using ngrok: https://ngrok.com/
 ```
 ./ngrok http 5000
+```
+
+
+## used tools:
+```
+# js
+canvasjs - v2.2
+
+# python
+flask
+flask-admin
+eyewitenss
 ```
