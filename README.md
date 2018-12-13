@@ -27,10 +27,16 @@ flask run
 with help https://github.com/tiangolo/uwsgi-nginx-flask-docker
 ```
 docker build -t monitor_reporter -f Dockerfile .
-docker run -d --name monitor_reporter_container -p 5000:80 --env-file env.list monitor_reporter 
+docker run -d --name monitor_reporter_container \
+              --env-file env.list \
+              -p 5000:80 \
+              monitor_reporter;
 
 # used db location /app/instance/example.sqlite
 # used static location /app/monitor_reporter/static
+# if need to mount your own static file and db
+#              -v /<your-detected_image>/detected_image:/app/monitor_reporter/static/detected_image \
+#              -v /<your-db_folder>/db_folder:/app/instance \
 ```
 
 
