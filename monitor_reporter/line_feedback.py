@@ -4,7 +4,11 @@ import os
 import arrow
 import peewee
 from eyewitness.audience_id import AudienceId
-from eyewitness.config import FEEDBACK_FALSE_ALERT, LINE_FALSE_ALERT_ANNOTATION_PATTERN
+from eyewitness.config import (
+    FEEDBACK_FALSE_ALERT,
+    LINE_FALSE_ALERT_ANNOTATION_PATTERN,
+    LINE_PLATFROM
+)
 from eyewitness.feedback_msg_utils import FeedbackMsg
 from eyewitness.image_id import ImageId
 from flask import Blueprint, request, current_app, abort
@@ -46,7 +50,7 @@ def handle_text_message(event):
     false_alter_feedback_handler = current_app.config['FALSE_ALTER_FEEDBACK_HANDLER']
     content = event.message.text
     line_id = event.source.user_id
-    audience_id = AudienceId(user_id=line_id, platform_id='line')
+    audience_id = AudienceId(user_id=line_id, platform_id=)
     arrive_timestamp = arrow.now().timestamp
     if 'open the door' in content:
         try:

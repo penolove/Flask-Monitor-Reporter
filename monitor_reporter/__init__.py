@@ -6,7 +6,8 @@ from flask_admin.contrib.peewee import ModelView
 from eyewitness.models import detection_models
 from eyewitness.models import feedback_models
 from eyewitness.models.db_proxy import DATABASE_PROXY
-from eyewitness.result_handler.sqlite_db_writer import FalseAlertPeeweeSQLiteDbWriter
+from eyewitness.result_handler.db_writer import FalseAlertPeeweeDbWriter
+from peewee import SqliteDatabase
 
 
 def create_app(test_config=None):
@@ -15,16 +16,14 @@ def create_app(test_config=None):
 
     db_path = os.path.join(app.instance_path, 'example.sqlite')
 
-    # which including build db_obj
-    false_alter_feedback_handler = FalseAlertPeeweeSQLiteDbWriter(db_path)
-
-    # db_obj = SqliteDatabase(db_path)  # this have been done in FalseAlertPeeweeSQLiteDbWriter
-    db_obj = false_alter_feedback_handler.database
-    DATABASE_PROXY.initialize(db_obj)
+    # which including build database obj
+    database = SqliteDatabase(db_path)
+    DATABASE_PROXY.initialize(database)
+    false_alter_feedback_handler = FalseAlertPeeweeDbWriter(database)
 
     # actually we needn't set the db obj here, since we initialize proxy above
     app.config.from_mapping(
-        DATABASE=db_obj,
+        DATABASE=database,
         FALSE_ALTER_FEEDBACK_HANDLER=false_alter_feedback_handler
     )
 
