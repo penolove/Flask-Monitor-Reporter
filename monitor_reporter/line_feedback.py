@@ -50,7 +50,7 @@ def handle_text_message(event):
     false_alter_feedback_handler = current_app.config['FALSE_ALTER_FEEDBACK_HANDLER']
     content = event.message.text
     line_id = event.source.user_id
-    audience_id = AudienceId(user_id=line_id, platform_id=)
+    audience_id = AudienceId(user_id=line_id, platform_id=LINE_PLATFROM)
     arrive_timestamp = arrow.now().timestamp
     if 'open the door' in content:
         try:
