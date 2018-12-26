@@ -40,7 +40,7 @@ def generate_bar_chart_tuples(channels, start_time, end_time):
         for detected_object in query:
             # collect label appear time (minimum unit: hour)
             label = detected_object.label
-            if valid_labels and label.label not in valid_labels:
+            if valid_labels and label not in valid_labels:
                 continue
             year = detected_object.image_id.timestamp.year
             month = detected_object.image_id.timestamp.month
