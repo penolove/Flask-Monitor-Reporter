@@ -6,6 +6,7 @@ from eyewitness.models.detection_models import (ImageInfo, BboxDetectionResult)
 
 bp = Blueprint('bar_chart', __name__, url_prefix='/bar_chart')
 
+valid_labels = set(os.environ.get('VALID_LABELS', '').split(','))
 
 @bp.route('/')
 def index():
@@ -38,6 +39,8 @@ def generate_bar_chart_tuples(channels, start_time, end_time):
         for detected_object in query:
             # collect label appear time (minimum unit: hour)
             label = detected_object.label
+            if valid_labels and label.label not in valid_labels:
+                continue
             year = detected_object.image_id.timestamp.year
             month = detected_object.image_id.timestamp.month
             day = detected_object.image_id.timestamp.day
