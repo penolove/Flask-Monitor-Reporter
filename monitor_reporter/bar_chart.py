@@ -7,7 +7,11 @@ from eyewitness.models.detection_models import (ImageInfo, BboxDetectionResult)
 
 bp = Blueprint('bar_chart', __name__, url_prefix='/bar_chart')
 
-valid_labels = set(os.environ.get('VALID_LABELS', '').split(','))
+valid_labels_env = os.environ.get('VALID_LABELS')
+if valid_labels_env is None:
+    valid_labels = set()
+else:
+    valid_labels = set(valid_labels_env.split(','))
 
 @bp.route('/')
 def index():
