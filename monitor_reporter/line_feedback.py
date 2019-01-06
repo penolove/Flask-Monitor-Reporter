@@ -5,7 +5,7 @@ import arrow
 import peewee
 from eyewitness.audience_id import AudienceId
 from eyewitness.config import (
-    FEEDBACK_FALSE_ALERT,
+    FEEDBACK_NO_OBJ,
     LINE_FALSE_ALERT_ANNOTATION_PATTERN,
     LINE_PLATFROM
 )
@@ -75,7 +75,7 @@ def handle_text_message(event):
                 feedback_dict['channel'], feedback_dict['timestamp'], feedback_dict['file_format'])
             feedback_dict = {
                 'audience_id': audience_id, 'receive_time': arrive_timestamp,
-                'feedback_method': FEEDBACK_FALSE_ALERT, 'image_id': image_id,
+                'feedback_method': FEEDBACK_NO_OBJ, 'image_id': image_id,
                 'feedback_meta': ''
             }
             # generate FeebackMsg obj
