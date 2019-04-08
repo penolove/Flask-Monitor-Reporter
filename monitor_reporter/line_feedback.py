@@ -100,10 +100,11 @@ def handle_text_message(event):
             false_alter_feedback_handler = current_app.config['FALSE_ALTER_FEEDBACK_HANDLER']
             feedback_dict = matched_obj.groupdict()
             image_id = ImageId(
-                feedback_dict['channel'], feedback_dict['timestamp'], feedback_dict['file_format'])
+                feedback_dict['channel'], int(feedback_dict['timestamp']),
+                feedback_dict['file_format'])
             false_alter_feedback_handler.insert_image_info(image_id)
             meta_data = feedback_dict.get('meta', '')
-            is_false_alert = 'I-want-to-be-a-member-of-183-Appier' in meta_data
+            is_false_alert = not ('I-want-to-be-a-member-of-183-Appier' in meta_data)
             feedback_dict = {
                 'audience_id': audience_id, 'receive_time': arrive_timestamp,
                 'feedback_method': FEEDBACK_NO_OBJ, 'image_id': image_id,
