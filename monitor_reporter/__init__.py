@@ -17,8 +17,11 @@ def create_app(test_config=None):
 
     db_path = os.path.join(app.instance_path, 'example.sqlite')
     appier_image_id_mapping_path = os.path.join(app.instance_path, 'appier_image_id_mapping.pkl')
-    with open(appier_image_id_mapping_path, 'rb') as f:
-        appier_image_id_mapping = pickle.load(f)
+    if os.path.exists(appier_image_id_mapping_path):
+        with open(appier_image_id_mapping_path, 'rb') as f:
+            appier_image_id_mapping = pickle.load(f)
+    else:
+        appier_image_id_mapping = {}
 
     # which including build database obj
     database = SqliteDatabase(db_path)
