@@ -26,11 +26,11 @@ flask run
 ## flask server with uwsgi and nginx example
 with help https://github.com/tiangolo/uwsgi-nginx-flask-docker
 ```
-docker build -t penolove/monitor_reporter -f Dockerfile .
+docker build -t penolove/monitor_reporter:183appier -f Dockerfile .
 docker run -d --name monitor_reporter_container \
               --env-file env.list \
               -p 5000:80 \
-              penolove/monitor_reporter;
+              penolove/monitor_reporter:183appier;
 
 # used db location /app/instance/example.sqlite
 # used static location /app/monitor_reporter/static
