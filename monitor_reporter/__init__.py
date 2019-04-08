@@ -1,4 +1,5 @@
 import os
+import pickle
 
 import flask_admin
 from flask import Flask
@@ -15,6 +16,9 @@ def create_app(test_config=None):
     app = Flask(__name__)
 
     db_path = os.path.join(app.instance_path, 'example.sqlite')
+    appier_image_id_mapping_path = os.path.join(app.instance_path, 'appier_image_id_mapping.pkl')
+    with open(appier_image_id_mapping_path, 'rb') as f:
+        appier_image_id_mapping = pickle.load(f)
 
     # which including build database obj
     database = SqliteDatabase(db_path)
@@ -24,7 +28,8 @@ def create_app(test_config=None):
     # actually we needn't set the db obj here, since we initialize proxy above
     app.config.from_mapping(
         DATABASE=database,
-        FALSE_ALTER_FEEDBACK_HANDLER=false_alter_feedback_handler
+        FALSE_ALTER_FEEDBACK_HANDLER=false_alter_feedback_handler,
+        APPIER_IMAGE_ID_MAPPING=appier_image_id_mapping
     )
 
     # ensure the instance folder exists
