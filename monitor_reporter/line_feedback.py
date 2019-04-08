@@ -73,7 +73,8 @@ def handle_text_message(event):
         image_id = ImageId(channel=employ_name, timestamp=arrive_timestamp, file_format='jpg')
         false_alert_feedback_text = LINE_FALSE_ALERT_MSG_TEMPLATE.format(
             image_id=image_id, meta='I-want-to-be-a-member-of-183-Appier')
-        image_url = '%s/%s'.format(SITE_DOMAIN, file_name)
+        image_url = '%s/%s' % (SITE_DOMAIN, file_name)
+        print(image_url)
         buttons_msg = TemplateSendMessage(
             alt_text='object detected',
             template=ButtonsTemplate(
@@ -82,7 +83,7 @@ def handle_text_message(event):
                 text='help to report result',
                 actions=[
                     MessageAction(
-                        label='Is This You?',
+                        label="Yes! It's me!!",
                         text=false_alert_feedback_text
                     ),
                 ]
@@ -100,6 +101,7 @@ def handle_text_message(event):
             feedback_dict = matched_obj.groupdict()
             image_id = ImageId(
                 feedback_dict['channel'], feedback_dict['timestamp'], feedback_dict['file_format'])
+            false_alter_feedback_handler.insert_image_info(image_id)
             meta_data = feedback_dict.get('meta', '')
             is_false_alert = 'I-want-to-be-a-member-of-183-Appier' in meta_data
             feedback_dict = {
