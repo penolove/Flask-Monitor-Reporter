@@ -1,3 +1,5 @@
 *.pyc
 env.list
 monitor_reporter.egg-info
+*.jpg
+*.pkl
