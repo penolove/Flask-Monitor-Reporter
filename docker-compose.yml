@@ -6,7 +6,7 @@ services:
     env_file:
       - ./env.list
     volumes:
-      - ./employee_pics:/app/monitor_reporter/static/
+      - ./employee_pics:/app/monitor_reporter/static/appier_employee
       - ./db_folder:/app/instance
     ports:
       - 5000:80

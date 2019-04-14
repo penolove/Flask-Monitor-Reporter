@@ -73,12 +73,11 @@ def handle_text_message(event):
         image_id = ImageId(channel=employ_name, timestamp=arrive_timestamp, file_format='jpg')
         false_alert_feedback_text = LINE_FALSE_ALERT_MSG_TEMPLATE.format(
             image_id=image_id, meta='I-want-to-be-a-member-of-183-Appier')
-        image_url = '%s/%s' % (SITE_DOMAIN, file_name)
-        print(image_url)
+        appier_employee_image_url = '%s/appier_employee/%s' % (SITE_DOMAIN, file_name)
         buttons_msg = TemplateSendMessage(
             alt_text='object detected',
             template=ButtonsTemplate(
-                thumbnail_image_url=image_url,
+                thumbnail_image_url=appier_employee_image_url,
                 title='object detected',
                 text='help to report result',
                 actions=[
