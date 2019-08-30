@@ -6,10 +6,14 @@ pyenv virtualenv monitor_36
 pyenv activate monitor_36
 pip install -r requirements.txt
 
-# [Optional] if using Line set your env in env.list file
+# set your env in env.list file
 set -a
 . ./env.list
 set +a
+
+# if env.list not including Line info set as env variable
+export LINE_CHANNEL_ACCESS_TOKEN=''
+export LINE_CHANNEL_SECRET=''
 
 # start App
 export FLASK_APP=monitor_reporter
