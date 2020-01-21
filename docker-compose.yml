@@ -1,0 +1,12 @@
+version: '2.3'
+
+services:
+  monitor-reporter:
+    build: .
+    env_file:
+      - ./env.list
+    volumes:
+      - ./monitor_reporter/weights/demo:/app/monitor_reporter/static/detected_image
+      - ./instance:/app/instance
+    ports:
+      - 5000:80
